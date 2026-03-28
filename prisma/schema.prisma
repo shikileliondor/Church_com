@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Statistique {
+  id        Int      @id @default(autoincrement())
+  date      DateTime
+  presence  Int
+  baptemes  Int      @default(0)
+  offrandes Float    @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Annonce {
+  id          Int      @id @default(autoincrement())
+  titre       String
+  description String?
+  categorie   String
+  statut      String   @default("brouillon")
+  createdAt   DateTime @default(now())
+}
+
+model Evenement {
+  id          Int      @id @default(autoincrement())
+  titre       String
+  description String?
+  date        DateTime
+  lieu        String?
+  categorie   String
+  createdAt   DateTime @default(now())
+}
+
+model Media {
+  id        Int      @id @default(autoincrement())
+  titre     String
+  type      String
+  url       String
+  categorie String?
+  taille    String?
+  duree     String?
+  createdAt DateTime @default(now())
+}
